@@ -4,7 +4,7 @@ on:
   workflow_dispatch: 
 
 jobs:
-  build:
+  commit-and-push:
     runs-on: ubuntu-22.04
 
     steps:
@@ -19,6 +19,7 @@ jobs:
       - name: Commit and Push
         run: |
           echo "New commit" >> newfile.txt
-          git commit -am "Add newfile.txt"
+          git add newfile.txt
+          git commit -m "Add newfile.txt"
           git push origin main
             
