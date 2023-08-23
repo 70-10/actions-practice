@@ -1,0 +1,27 @@
+name: Get data for API and save response
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  api-request-and-save:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      
+      - name: Setup git
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+      
+      - name: Request PokeAPI and save response
+        run: |
+          curl https://pokeapi.co/api/v2/pokemon/ditto >> ditto.json
+      
+      - name: Commit and Push
+        run: |
+          git add ditto.json
+          git commit -m "Add ditto"
+          git push origin main
